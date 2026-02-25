@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Baby ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#ff4b6e,#ff758c);
+color:white;
+text-align:center;
+overflow-x:hidden;
+scroll-behavior:smooth;
+}
+
+/* LOCK SCREEN */
+
+#lockScreen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+input{
+padding:12px;
+border:none;
+border-radius:20px;
+margin-top:15px;
+text-align:center;
+font-size:16px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+margin-top:15px;
+background:white;
+color:#ff4b6e;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+/* MAIN SITE */
+
+#mainSite{
+display:none;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.hero img{
+width:180px;
+height:180px;
+border-radius:50%;
+border:4px solid white;
+object-fit:cover;
+margin-bottom:20px;
+box-shadow:0 0 25px white;
+}
+
+.type{
+margin-top:10px;
+font-size:16px;
+min-height:24px;
+}
+
+/* LILY BOUQUET */
+
+.bouquet{
+margin-top:40px;
+padding:20px;
+opacity:0;
+transform:translateY(40px);
+transition:all 1.2s ease;
+}
+
+.bouquet.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.bouquet img{
+width:220px;
+max-width:80%;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.bouquetText{
+margin-top:15px;
+font-size:16px;
+opacity:0.9;
+}
+
+/* LETTER */
+
+.letter{
+background:white;
+color:#ff4b6e;
+margin:20px;
+padding:25px;
+border-radius:15px;
+opacity:0;
+transform:translateY(40px);
+transition:all 1.2s ease;
+font-size:17px;
+line-height:1.6;
+}
+
+.letter.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+padding:20px;
+opacity:0;
+transform:translateY(40px);
+transition:all 1.2s ease;
+}
+
+.gallery.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.gallery img{
+width:100%;
+border-radius:12px;
+}
+
+/* HEARTS */
+
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:20px;
+animation:float 5s linear infinite;
+pointer-events:none;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+<source src="music/song.mp3" type="audio/mp3">
+</audio>
+
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+
+<h2>Enter Password ❤️</h2>
+<p>Hint: Your name</p>
+
+<input type="password" id="password">
+
+<button onclick="unlock()">Open</button>
+
+<p id="error"></p>
+
+</div>
+
+
+
+<!-- MAIN SITE -->
+<div id="mainSite">
+
+
+<!-- HERO -->
+<div class="hero">
+
+<img src="images/main.jpg">
+
+<h1>Happy Birthday Baby ❤️</h1>
+
+<div class="type" id="typing"></div>
+
+</div>
+
+
+
+<!-- LILY BOUQUET -->
+<div class="bouquet" id="bouquet">
+
+<img src="images/lilly.png">
+
+<p class="bouquetText">
+These lilies are for you 🌸<br>
+soft, beautiful, and rare — just like you.
+</p>
+
+</div>
+
+
+
+<!-- LETTER -->
+<div class="letter" id="letter">
+
+Happy Birthday ❤️<br><br>
+
+You are my First Thought of the day<br>
+and the Last Thought of night<br><br>
+
+You are my happiness,<br>
+my peace,<br>
+my everything.<br><br>
+
+I love you forever ❤️<br><br>
+
+Mere Pyaare Pyaare Guide ❤️
+
+</div>
+
+
+
+<!-- GALLERY -->
+<div class="gallery" id="gallery">
+
+<img src="images/1.jpg">
+<img src="images/2.jpg">
+<img src="images/3.jpg">
+<img src="images/4.jpg">
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* PASSWORD */
+const correctPassword = "priya";
+
+
+/* UNLOCK */
+
+function unlock(){
+
+let entered = document.getElementById("password").value;
+
+if(entered === correctPassword){
+
+document.getElementById("lockScreen").style.display="none";
+
+document.getElementById("mainSite").style.display="block";
+
+document.getElementById("music").play();
+
+}
+else{
+
+document.getElementById("error").innerHTML="Wrong password 😢";
+
+}
+
+}
+
+
+/* TYPING EFFECT */
+
+let text="I Love You 💖";
+let i=0;
+
+function typing(){
+
+if(i < text.length){
+
+document.getElementById("typing").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typing,70);
+
+}
+
+}
+
+typing();
+
+
+
+/* FADE IN ON SCROLL */
+
+const bouquet = document.getElementById("bouquet");
+const letter = document.getElementById("letter");
+const gallery = document.getElementById("gallery");
+
+
+function reveal(){
+
+const trigger = window.innerHeight * 0.85;
+
+if(bouquet.getBoundingClientRect().top < trigger){
+bouquet.classList.add("show");
+}
+
+if(letter.getBoundingClientRect().top < trigger){
+letter.classList.add("show");
+}
+
+if(gallery.getBoundingClientRect().top < trigger){
+gallery.classList.add("show");
+}
+
+}
+
+window.addEventListener("scroll", reveal);
+
+reveal();
+
+
+
+/* FLOATING HEARTS */
+
+setInterval(function(){
+
+let heart = document.createElement("div");
+
+heart.className = "heart";
+
+heart.innerHTML = "❤️";
+
+heart.style.left = Math.random()*100 + "vw";
+
+heart.style.fontSize = (15 + Math.random()*20) + "px";
+
+document.body.appendChild(heart);
+
+setTimeout(function(){
+heart.remove();
+},5000);
+
+},600);
+
+</script>
+
+
+</body>
+</html>
